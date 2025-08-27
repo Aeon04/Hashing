@@ -1,0 +1,51 @@
+@model IEnumerable<Hashing.Models.User>
+
+@{
+    ViewData["Title"] = "User Data";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>User Data</h2>
+        <a asp-action="Logout" class="btn btn-outline-danger">Logout</a>
+    </div>
+    
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Username</th>
+                            <th>Password (SHA256)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            @foreach (var user in Model)
+                            {
+                                <tr>
+                                    <td>@user.Id</td>
+                                    <td>@user.Name</td>
+                                    <td>@user.Username</td>
+                                    <td>
+                                        <code class="text-break">@user.Password</code>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="4" class="text-center text-muted">No users found</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
